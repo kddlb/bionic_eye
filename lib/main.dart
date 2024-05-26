@@ -215,6 +215,15 @@ class _MainPageState extends State<MainPage> {
       });
       return;
     }
+    if (reader.canProvide(Formats.jpeg)) {
+      reader.getFile(Formats.jpeg, (fl) async {
+        var bytes = await fl.readAll();
+        setState(() {
+          image = bytes;
+        });
+      });
+      return;
+    }
     if (reader.canProvide(Formats.heic)) {
       reader.getFile(Formats.heic, (fl) async {
         var bytes = await fl.readAll();
