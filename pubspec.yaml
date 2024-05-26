@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   camerawesome: ^2.0.1
+  cross_file: ^0.3.4+1
   file_picker: ^8.0.3
   flutter:
     sdk: flutter

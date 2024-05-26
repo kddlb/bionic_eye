@@ -98,7 +98,9 @@ class _MainPageState extends State<MainPage> {
     return CallbackShortcuts(
         bindings: <ShortcutActivator, VoidCallback>{
           const SingleActivator(LogicalKeyboardKey.keyV, control: true):
-              pasteImage
+              pasteImage,
+          const SingleActivator(LogicalKeyboardKey.keyV, meta: true):
+              pasteImage,
         },
         child: Scaffold(
             appBar: AppBar(
@@ -206,6 +208,33 @@ class _MainPageState extends State<MainPage> {
     final reader = await clipboard!.read();
     if (reader.canProvide(Formats.png)) {
       reader.getFile(Formats.png, (fl) async {
+        var bytes = await fl.readAll();
+        setState(() {
+          image = bytes;
+        });
+      });
+      return;
+    }
+    if (reader.canProvide(Formats.heic)) {
+      reader.getFile(Formats.heic, (fl) async {
+        var bytes = await fl.readAll();
+        setState(() {
+          image = bytes;
+        });
+      });
+      return;
+    }
+    if (reader.canProvide(Formats.heif)) {
+      reader.getFile(Formats.heif, (fl) async {
+        var bytes = await fl.readAll();
+        setState(() {
+          image = bytes;
+        });
+      });
+      return;
+    }
+    if (reader.canProvide(Formats.tiff)) {
+      reader.getFile(Formats.tiff, (fl) async {
         var bytes = await fl.readAll();
         setState(() {
           image = bytes;
